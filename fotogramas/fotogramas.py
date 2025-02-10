@@ -225,7 +225,11 @@ class VideoProcessorApp:
 
     def on_canvas_click(self, event):
         try:
-            item = self.canvas.find_closest(event.x, event.y)
+            # Ajustar coordenadas según el scroll
+            canvas_x = self.canvas.canvasx(event.x)
+            canvas_y = self.canvas.canvasy(event.y)
+            
+            item = self.canvas.find_closest(canvas_x, canvas_y)
             if not item:
                 return
             tags = self.canvas.gettags(item)
